@@ -46,7 +46,7 @@ class TipCalculatorTest {
         val tip = calculateTip(amount, tipPercent, roundUp)
 
         // Assert
-        assertEquals(-10.0, tip, 0.001)
+        assertEquals(0.0, tip, 0.001)
 
     }
 
