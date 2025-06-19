@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 
@@ -65,17 +66,17 @@ fun TipCalculatorScreen() {
             modifier = Modifier.fillMaxWidth()
         )
 
-        Text("Número de personas: $numberOfPeople")
+        Text(modifier = Modifier.testTag("people"),text = "Número de personas: $numberOfPeople")
         Row (
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Button(onClick = { if (numberOfPeople > 1) numberOfPeople-- }) {
+            Button(modifier = Modifier.testTag("-"),onClick = { if (numberOfPeople > 1) numberOfPeople-- }) {
                 Text("-")
             }
             Text(text = numberOfPeople.toString())
-            Button(onClick = { numberOfPeople++ }) {
+            Button(modifier = Modifier.testTag("+"),onClick = { numberOfPeople++ }) {
                 Text("+")
             }
         }
@@ -94,6 +95,7 @@ fun TipCalculatorScreen() {
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
+            modifier = Modifier.testTag("propina"),
             text = "Propina: $${"%.2f".format(tip)}",
             style = MaterialTheme.typography.headlineSmall
         )
