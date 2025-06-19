@@ -54,15 +54,13 @@ fun TipCalculatorScreen() {
             steps = 49,
             modifier = Modifier.fillMaxWidth().testTag("seekBarPercentage")
         )
+        Text(modifier = Modifier.testTag("people"),text = "Número de personas: $numberOfPeople")
 
-        Row(
-            Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically
         ) {
-            Button(onClick = { if (numberOfPeople > 1) numberOfPeople-- }) {
+            Button(modifier = Modifier.testTag("-"),onClick = { if (numberOfPeople > 1) numberOfPeople-- }) {
                 Text("-")
             }
-            Text(numberOfPeople.toString(), modifier = Modifier.testTag("peopleCount"))
+      Text(numberOfPeople.toString(), modifier = Modifier.testTag("peopleCount"))
             Button(onClick = { numberOfPeople++ }, modifier = Modifier.testTag("peopleIncrement")) {
                 Text("+")
             }
