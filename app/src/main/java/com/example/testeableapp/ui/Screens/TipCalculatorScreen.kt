@@ -21,8 +21,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+
 
 @Composable
 fun TipCalculatorScreen() {
@@ -35,74 +37,57 @@ fun TipCalculatorScreen() {
     val tip = calculateTip(bill, tipPercentage, roundUp)
     val totalPerPerson = if (numberOfPeople > 0) (bill + tip) / numberOfPeople else 0.0
 
-    Column(
-        modifier = Modifier.padding(32.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        Text(
-            text = "Calculadora de Propinas",
-            style = MaterialTheme.typography.headlineMedium
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-
+    Column(Modifier.padding(32.dp)) {
         OutlinedTextField(
             value = billAmount,
             onValueChange = { billAmount = it },
             label = { Text("Monto de la cuenta") },
             singleLine = true,
-            keyboardOptions = KeyboardOptions.Default.copy(
-                keyboardType = KeyboardType.Number
-            ),
-            modifier = Modifier.fillMaxWidth()
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            modifier = Modifier.fillMaxWidth().testTag("inputBill")
         )
 
-        Text("Porcentaje de propina: $tipPercentage%")
         Slider(
             value = tipPercentage.toFloat(),
             onValueChange = { tipPercentage = it.toInt() },
             valueRange = 0f..50f,
             steps = 49,
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("seekBarPercentage")
         )
 
-        Text("Número de personas: $numberOfPeople")
-        Row (
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
-            modifier = Modifier.fillMaxWidth()
+        Row(
+            Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Button(onClick = { if (numberOfPeople > 1) numberOfPeople-- }) {
                 Text("-")
             }
-            Text(text = numberOfPeople.toString())
-            Button(onClick = { numberOfPeople++ }) {
+            Text(numberOfPeople.toString(), modifier = Modifier.testTag("peopleCount"))
+            Button(onClick = { numberOfPeople++ }, modifier = Modifier.testTag("peopleIncrement")) {
                 Text("+")
             }
         }
 
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
+        Row(Modifier.fillMaxWidth()) {
             Checkbox(
                 checked = roundUp,
-                onCheckedChange = { roundUp = it }
+                onCheckedChange = { roundUp = it },
+                modifier = Modifier.testTag("checkboxRoundUp")
             )
-            Text("Redondear propina", modifier = Modifier.padding(start = 8.dp))
+            Text("Redondear propina")
         }
 
-        Spacer(modifier = Modifier.height(24.dp))
-
         Text(
-            text = "Propina: $${"%.2f".format(tip)}",
-            style = MaterialTheme.typography.headlineSmall
+            "Propina: $${"%.2f".format(tip)}",
+            modifier = Modifier.testTag("textTipResult")
         )
         Text(
-            text = "Total por persona: $${"%.2f".format(totalPerPerson)}",
-            style = MaterialTheme.typography.headlineSmall
+            "Total por persona: $${"%.2f".format(totalPerPerson)}",
+            modifier = Modifier.testTag("textTotalPerPerson")
         )
     }
 }
+
 
 fun calculateTip(amount: Double, tipPercent: Int, roundUp: Boolean): Double {
     var tip = amount * tipPercent / 100
