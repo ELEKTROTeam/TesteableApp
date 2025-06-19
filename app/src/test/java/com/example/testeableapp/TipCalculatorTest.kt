@@ -8,7 +8,7 @@ import com.example.testeableapp.ui.Screens.calculateTip
 class TipCalculatorTest {
 
     @Test
-    fun testTwentyPercentTip() {
+    fun `Calculate 20% tip`() {
         // Arrange
         val amount = 100.0
         val tipPercent = 20
@@ -22,7 +22,7 @@ class TipCalculatorTest {
     }
 
     @Test
-    fun testFifteenPercentAndRounded() {
+    fun `Calculate 15% tip and round up`() {
         // Arrange
         val amount = 99.99
         val tipPercent = 15
@@ -36,7 +36,7 @@ class TipCalculatorTest {
     }
 
     @Test
-    fun testNegativeAmount() {
+    fun `Calculate negative amount, expected 0`() {
         // Arrange
         val amount = -50.0
         val tipPercent = 20
@@ -51,7 +51,7 @@ class TipCalculatorTest {
     }
 
     @Test
-    fun testTotalPerPersonIncludingTip() {
+    fun `Calculate total per person (include tip)`() {
         // Arrange
         val amount = 120.0
         val tipPercent = 10
