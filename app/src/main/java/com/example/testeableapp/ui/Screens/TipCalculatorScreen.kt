@@ -54,7 +54,7 @@ fun TipCalculatorScreen() {
             keyboardOptions = KeyboardOptions.Default.copy(
                 keyboardType = KeyboardType.Number
             ),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth().testTag("amount")
         )
 
         Text("Porcentaje de propina: $tipPercentage%")

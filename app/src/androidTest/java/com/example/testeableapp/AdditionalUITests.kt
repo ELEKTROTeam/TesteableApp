@@ -11,7 +11,7 @@ import com.example.testeableapp.ui.Screens.TipCalculatorScreen
 import org.junit.Rule
 import org.junit.Test
 
-class UIAdditionalTests {
+class AdditionalUITests {
     @get:Rule
     val composeTestRule = createComposeRule()
 
@@ -34,7 +34,7 @@ class UIAdditionalTests {
             .assertIsDisplayed()
             .assertTextEquals(expectedTip)
 
-        composeTestRule.onNodeWithText("Total por persona: \$0.00")
+        composeTestRule.onNodeWithText("Total por persona: $0.00")
             .assertExists()
             .assertIsDisplayed()
     }
