@@ -24,12 +24,12 @@ class AdditionalUITests {
         }
 
         composeTestRule
-            .onNodeWithTag("amount")
+            .onNodeWithTag("inputBill")
             .assertExists()
             .performTextInput("..")
 
 
-        composeTestRule.onNodeWithTag("propina")
+        composeTestRule.onNodeWithTag("textTipResult")
             .assertExists()
             .assertIsDisplayed()
             .assertTextEquals(expectedTip)
@@ -44,12 +44,12 @@ class AdditionalUITests {
         composeTestRule.setContent {
             TipCalculatorScreen()
         }
-        composeTestRule.onNodeWithTag("+").performClick()
-        composeTestRule.onNodeWithTag("+").performClick()
-        composeTestRule.onNodeWithTag("people").assertExists().assertTextEquals("Número de personas: 3")
-        composeTestRule.onNodeWithTag("-").performClick()
-        composeTestRule.onNodeWithTag("-").performClick()
-        composeTestRule.onNodeWithTag("-").performClick()
-        composeTestRule.onNodeWithTag("people").assertExists().assertTextEquals("Número de personas: 1")
+        composeTestRule.onNodeWithTag("peopleIncrement").performClick()
+        composeTestRule.onNodeWithTag("peopleIncrement").performClick()
+        composeTestRule.onNodeWithTag("peopleCount").assertExists().assertTextEquals("3")
+        composeTestRule.onNodeWithTag("peopleDecrease").performClick()
+        composeTestRule.onNodeWithTag("peopleDecrease").performClick()
+        composeTestRule.onNodeWithTag("peopleDecrease").performClick()
+        composeTestRule.onNodeWithTag("peopleCount").assertExists().assertTextEquals("1")
     }
 }
